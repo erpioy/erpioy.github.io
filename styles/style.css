@@ -1,0 +1,90 @@
+* {
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+html,body {
+    background:linear-gradient(to right, lightblue, pink);
+
+}
+
+h1 {
+    text-align: center;
+    margin:100px;
+}
+
+.button {
+    color: initial;
+}
+
+
+.wrap{
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.wrap .button{
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    margin:0 5px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-out;
+}
+
+.wrap .button:hover {
+    width: 200px;
+
+}
+.wrap .button .icon{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border-radius: 50px;
+}
+
+.wrap .button .icon i{
+    font-size: 25px;
+    line-height: 60px;
+    
+}
+
+.wrap .button span{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 60px;
+    margin-left: 30px;
+}
+
+.wrap a:nth-child(1):hover .icon {
+    background-color: rgb(88, 123, 143);
+}
+.wrap a:nth-child(2):hover .icon {
+    background-color: rgb(140, 107, 126);
+}
+.wrap a:nth-child(3):hover .icon {
+    background-color: rgb(172, 95, 160);
+}
+.wrap a:nth-child(4):hover .icon {
+    background-color: rgb(145, 57, 131);
+}
+
+.wrap a:nth-child(1) span{
+    color: blueviolet;
+}
+.wrap a:nth-child(2) span{
+    color: rgb(65, 118, 151);
+}
+.wrap a:nth-child(3) span{
+    color: rgb(96, 49, 141);
+}
+.wrap a:nth-child(4) span{
+    color: rgb(124, 42, 42);
+}
