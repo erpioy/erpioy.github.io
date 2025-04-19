@@ -8,3 +8,27 @@ html,body {
     background:linear-gradient(to right, lightblue, pink);
 
 }
+
+header nav {
+    margin-top:10px;
+    margin-bottom: 20px;
+    
+}
+
+header nav a{
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color:black;
+}
+
+header nav a:hover {
+    background-color: rgb(215, 240, 232);
+}
+
+main section .markdown {
+    width: 80%;
+    margin:0 auto;
+    font-size:25px;
+    white-space: pre-line;
+}
