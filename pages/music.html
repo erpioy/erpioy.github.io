@@ -6,60 +6,71 @@
     <title>Document</title>
     <link rel="stylesheet" href="../styles/music.css" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/github.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
   </head>
   <body>
     <header>
-        <nav>
-            <a href="">Home</a>
-            <a href="">Front-end</a>
-            <a href="">Python</a>
-            <a href="">algorithm</a>
-            <a href="">Network</a>
-            <a href="">Database</a>
-            <a href="">Test</a>
-            <a href="">Linux</a>
-            <a href="">Vue</a>
-            <a href="">Python-framework</a>
-        </nav>
+      <nav>
+        <a href="">Home</a>
+        <a href="">Front-end</a>
+        <a href="">Python</a>
+        <a href="">algorithm</a>
+        <a href="">Network</a>
+        <a href="">Database</a>
+        <a href="">Test</a>
+        <a href="">Linux</a>
+        <a href="">Vue</a>
+        <a href="">Python-framework</a>
+      </nav>
     </header>
     <main>
       <section>
-        <button>下一篇</button>
-        <div class="markdown" id="speech"></div>
-
+        <button class="last">上一篇</button>
+        <button class="next">下一篇</button>
+        <div class="markdown" id="0" name="myWorldView.md"></div>
       </section>
     </main>
 
     <script>
-      function toMark(path){
+      const article = [
+        "myWorldView.md",
+        "observingHumanityInACup.md",
+        "yesWeCan.md",
+      ];
+      function toMark(path) {
         fetch(path)
-          .then(Response => Response.text())
-          .then(text => {
-            document.querySelector('.markdown').innerHTML = 
-              marked.parse(text);
+          .then((Response) => Response.text())
+          .then((text) => {
+            document.querySelector(".markdown").innerHTML = marked.parse(text);
           });
       }
 
-      const btn = document.querySelector('button');
-      btn.addEventListener('click',()=>{
-        const current = document.querySelector('main section .markdown');
-        if(current.id === 'speech'){
-          current.id = 'article';
-          const path = '../source/article.md';
-          toMark(path);
-        }else{
-          current.id = 'speech';
-          const path = '../source/speech.md'
-          toMark(path);
-        }
-      });
-      toMark('../source/speech.md');
+      const btns = document.querySelectorAll("button");
 
+      for (const btn of btns) {
+        if (btn.className === "last") {
+          bind_btn(btn, article.length - 1);
+        } else {
+          bind_btn(btn, 1);
+        }
+      }
+
+      function bind_btn(btn, num) {
+        btn.addEventListener("click", () => {
+          const current = document.querySelector("main section .markdown");
+          const index = Number(current.id);
+          const new_index = (index + num) % article.length;
+          current.name = article[new_index];
+          current.id = new_index.toString();
+          const path = "../source/article/" + current.name;
+          toMark(path);
+        });
+      }
+      toMark("../source/article/myWorldView.md");
     </script>
-    
-    
-    
-      
-    </div>
   </body>
 </html>
