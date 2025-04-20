@@ -31,16 +31,48 @@
       <section>
         <button class="last">上一篇</button>
         <button class="next">下一篇</button>
-        <div class="markdown" id="0" name="myWorldView.md"></div>
+        <select class="content">
+          <option value="article">article</option>
+          <option value="poetry">poetry</option>
+          <option value="singer">singer</option>
+          <option value="song">song</option>
+        </select>
+        <div class="markdown" id="0" name="aSpecialPig.md"></div>
       </section>
     </main>
 
     <script>
-      const article = [
+      const source = [
+      [
+        "aSpecialPig.md",
         "myWorldView.md",
         "observingHumanityInACup.md",
         "yesWeCan.md",
+      ],
+      [],
+      [
+        'cengli.md',
+        'fangdatong.md',
+        'linyinian.md',
+        'zanghuimei.md'
+      ],
+      []
       ];
+      const option = document.querySelector('.content');
+      const current = document.querySelector("main section .markdown");
+      let folder = option.value;
+      let index = option.selectedIndex;
+      const pre_path = '../source/'
+
+      option.addEventListener('change',(e)=>{
+        folder = e.target.value;
+        index = e.target.selectedIndex;
+        current.id = "0";
+        current.name = folder + '.md';
+        const new_path = pre_path + folder + '/' + source[index][0];
+        toMark(new_path);
+      });
+
       function toMark(path) {
         fetch(path)
           .then((Response) => Response.text())
@@ -53,7 +85,7 @@
 
       for (const btn of btns) {
         if (btn.className === "last") {
-          bind_btn(btn, article.length - 1);
+          bind_btn(btn, source[index].length - 1);
         } else {
           bind_btn(btn, 1);
         }
@@ -61,16 +93,15 @@
 
       function bind_btn(btn, num) {
         btn.addEventListener("click", () => {
-          const current = document.querySelector("main section .markdown");
-          const index = Number(current.id);
-          const new_index = (index + num) % article.length;
-          current.name = article[new_index];
+          const ind = Number(current.id);
+          const new_index = (ind + num) % source[index].length;
+          current.name = source[index][new_index];
           current.id = new_index.toString();
-          const path = "../source/article/" + current.name;
+          const path = "../source/" + folder + '/'+ current.name;
           toMark(path);
         });
       }
-      toMark("../source/article/myWorldView.md");
+      toMark("../source/article/aSpecialPig.md");
     </script>
   </body>
 </html>
